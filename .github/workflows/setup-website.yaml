@@ -11,7 +11,7 @@ jobs:
     container: there4/markdown-resume
     steps:
     - uses: actions/checkout@master
-    - name: Create local changes
+    - name: Generate resume pdf and md
       run: |
         # generate resume pdf
         md2resume pdf -t readable resume/ddulic.md static/
@@ -44,11 +44,29 @@ jobs:
         sed -i 's/ {#projects}//g' $DEST
         sed -i 's/ {#certificates}//g' $DEST
         sed -i 's/ {#education}//g' $DEST
+    - name: Upload generate-resume pdf
+      uses: actions/upload-artifact@v1
+      with:
+        name: pdf
+        path: static/ddulic.pdf
+    - name: Upload generate-resume markdown
+      uses: actions/upload-artifact@v1
+      with:
+        name: markdown
+        path: content/resume.md
 
   build-and-deploy-website:
     needs: generate-resume
     runs-on: ubuntu-latest
     steps:
+      - name: Download generate-resume pdf
+        uses: actions/download-artifact@v1
+        with:
+          name: pdf
+      - name: Download generate-resume markdown
+        uses: actions/download-artifact@v1
+        with:
+          name: markdown
       - uses: actions/checkout@v2
         with:
           submodules: true  # Fetch Hugo themes
@@ -63,7 +81,7 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: sync s3
+      - name: Sync s3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
@@ -74,7 +92,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: invalidate
+      - name: Invalidate Cloudfront
         uses: chetan/invalidate-cloudfront-action@master
         env:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
