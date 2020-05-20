@@ -74,18 +74,20 @@ jobs:
       uses: actions/download-artifact@v1
       with:
         name: markdown
+        path: .
     - name: Download pdf artifact
       uses: actions/download-artifact@v1
       with:
         name: pdf
+        path: .
 
-    - name: Check files
-      run: ls -alh
+    - name: Check downloaded files
+      run: ls -alh static resume
 
     - name: Build
       run: hugo --minify
 
-    - name: Check files
+    - name: Check public files
       run: ls -alh public
 
     - name: Sync s3
