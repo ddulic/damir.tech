@@ -59,16 +59,6 @@ jobs:
     needs: generate-resume
     runs-on: ubuntu-latest
     steps:
-    - name: Download generate-resume pdf
-      uses: actions/download-artifact@v1
-      with:
-        name: pdf
-        path: static/ddulic.pdf
-    - name: Download generate-resume markdown
-      uses: actions/download-artifact@v1
-      with:
-        name: markdown
-        path: content/resume.md
     - uses: actions/checkout@v2
       with:
         submodules: true  # Fetch Hugo themes
@@ -80,8 +70,21 @@ jobs:
         hugo-version: '0.71.0'
         # extended: true
 
+    - name: Download artifacts
+      uses: actions/download-artifact@v1
+      with:
+        name: markdown
+        path: content/resume.md
+      uses: actions/download-artifact@v1
+      with:
+        name: pdf
+        path: static/ddulic.pdf
+
     - name: Build
       run: hugo --minify
+
+    - name: Check files
+      run: ls -alh public
 
     - name: Sync s3
       uses: jakejarvis/s3-sync-action@master
