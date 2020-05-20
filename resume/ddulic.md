@@ -1,8 +1,9 @@
----
-title: Damir Dulic, DevOps Engineer
----
+# Damir Dulic, DevOps Engineer
 
----
+> [damir.tech](https://damir.tech) || [me@damir.tech](mailto:me@damir.tech)  
+
+------
+
 #### Profile {#profile}
 
 * Comprehensive technical knowledge and hands-on experience in the design and implementation of fully automated CI and CD systems
@@ -73,15 +74,6 @@ Final Exam: Development of a Multiplatform Web Application With The Usage of the
 
 ------
 
+#### Footer {#footer}
 
-Here is some social media stuff ⬇️
-- [Linkedin](https://www.linkedin.com/in/ddulic/)
-- [Github](https://github.com/ddulic)
-- [Twitter](https://twitter.com/_ddulic)
-- and [Keybase](https://keybase.io/ddulic) to confirm it all 🔑
-
----
-
-If you want to contact me, my email is in the pdf version of my resume which can be downloaded below.
-
-<a class="animated-button sandy-one" href="/ddulic.pdf">Download Resume</a>
+Damir Dulic -- [damir.tech](https://damir.tech) -- [me@damir.tech](me@damir.tech)

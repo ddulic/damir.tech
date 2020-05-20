@@ -1,0 +1,83 @@
+name: setup-website
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  generate-resume:
+    container: there4/markdown-resume
+    steps:
+    - uses: actions/checkout@master
+    - name: Create local changes
+      run: |
+        # generate resume pdf
+        md2resume pdf -t readable resume/ddulic.md static/
+        # generate resume page
+        PAGE=resume/ddulic.md
+        DEST=content/resume.md
+
+        echo '---
+        title: Damir Dulic, DevOps Engineer
+        ---
+        ---' > $DEST
+
+        FROM=$(grep -n "#### Profile" $PAGE | awk -F':' '{print $1}')
+        TO=$(grep -n "#### Footer" $PAGE | awk -F':' '{print $1}')
+        awk "FNR>=$FROM && FNR<=$(expr $TO - 1)" $PAGE >> $DEST
+
+        echo '
+        Here is some social media stuff ⬇️
+        - [Linkedin](https://www.linkedin.com/in/ddulic/)
+        - [Github](https://github.com/ddulic)
+        - [Twitter](https://twitter.com/_ddulic)
+        - and [Keybase](https://keybase.io/ddulic) to confirm it all 🔑
+        ---
+        If you want to contact me, my email is in the pdf version of my resume which can be downloaded below.
+        <a class="animated-button sandy-one" href="/ddulic.pdf">Download Resume</a>' >> $DEST
+
+        sed -i '/<div style="page-break-after: always;"><\/div>/d' $DEST
+        sed -i 's/ {#profile}//g' $DEST
+        sed -i 's/ {#experience}//g' $DEST
+        sed -i 's/ {#projects}//g' $DEST
+        sed -i 's/ {#certificates}//g' $DEST
+        sed -i 's/ {#education}//g' $DEST
+
+  build-and-deploy-website:
+    needs: generate-resume
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.71.0'
+          # extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: sync s3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_REGION: 'eu-west-1'
+          SOURCE_DIR: 'public'
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: invalidate
+        uses: chetan/invalidate-cloudfront-action@master
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: '/index.html'
+          AWS_REGION: 'us-east-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
