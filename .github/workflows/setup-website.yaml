@@ -70,11 +70,12 @@ jobs:
         hugo-version: '0.71.0'
         # extended: true
 
-    - name: Download artifacts
+    - name: Download markdown artifact
       uses: actions/download-artifact@v1
       with:
         name: markdown
         path: content/resume.md
+    - name: Download pdf artifact
       uses: actions/download-artifact@v1
       with:
         name: pdf
