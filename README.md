@@ -1,4 +1,4 @@
-https://github.com/ddulic/damir.tech/workflows/setup-website/badge.svg
+![Built Status](https://github.com/ddulic/damir.tech/workflows/setup-website/badge.svg)
 
 # Website
 
