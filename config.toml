@@ -67,8 +67,10 @@ googleAnalytics = "UA-68718169-1"
     name = "github"
     url = "https://github.com/ddulic"
 
-[menu]
+[permalinks]
+  posts = "/:title"
 
+[menu]
   [[menu.main]]
     name = "Posts"
     url = "posts/"
