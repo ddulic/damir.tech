@@ -2,7 +2,7 @@
 date: 2020-05-25
 title: Questions in Interviews
 images:
-  - /img/background_interviewq.jpg
+  - /img/background_interview.jpg
 tags:
   - interviews
 ---
