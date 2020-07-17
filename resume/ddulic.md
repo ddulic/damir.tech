@@ -4,10 +4,10 @@
 
 ------
 
-#### Profile {#profile}
+#### Professional Summary {#professional_summary}
 
-* Comprehensive technical knowledge and hands-on experience in the design and implementation of fully automated CI and CD systems
-* Passionate, responsible and committed engineer, with a get-it-done, on-time spirit
+* Comprehensive technical knowledge and hands-on experience in the design and implementation of fully automated systems
+* Passionate, responsible and committed engineer, with a growth mindset and a get-it-done, on-time spirit
 * Highly adaptable in quickly changing technical environments with very strong organizational and analytical skills
 * Believer of Behaviour Driven Development and Agile software development principles
 * Self-motivated and hardworking with the ability to work under minimal supervision and guidance
@@ -16,9 +16,18 @@
 
 #### Experience {#experience}
 
+WorldRemit
+: *DevOps Engineer* --
+  __Apr 2020 - Present__
+
+* Deploy and Configure Istio Service Mesh
+* Help Implement and Configure Kong API Gateway in Kubernetes
+* Develop a Custom Terraform Provider for istioctl in order to utilise kustomize
+* Optimize Fluentd Logging in AWS EKS
+
 Elsevier (ScienceDirect)
 : *Systems Engineer III* --
-  __Mar 2019 - Present__
+  __Mar 2019 - Apr 2020__
 
 * Lead the New Relic adoption and migration for ScienceDirect
 * Assist in developing a process for migrating to Amazon Linux 2 using Packer
@@ -54,13 +63,15 @@ ICBTech
 #### Projects {#projects}
 
 [damir.tech](https://damir.tech)
-: Personal blog, wiki, hosted on AWS S3 using Github and Travis CI
+: Personal blog, hosted on AWS S3 & CloudFront using Github and Github Actions
+
+Check my [Github Profile](https://github.com/ddulic) for other projects I am involed in
 
 ------
 
 #### Certificates {#certificates}
 
-*[AWS Certified Solutions Architect - Associate](https://www.certmetrics.com/amazon/public/badge.aspx?i=1&t=c&d=2019-09-09&ci=AWS00595823)*
+*[AWS Certified Solutions Architect - Associate](https://www.youracclaim.com/badges/fb86d881-85f4-46d1-a379-5840d047f497)*
 
 ------
 
