@@ -4,7 +4,7 @@
 
 ------
 
-#### Professional Summary {#professional_summary}
+#### Professional Summary {#psummary}
 
 * Comprehensive technical knowledge and hands-on experience in the design and implementation of fully automated systems
 * Passionate, responsible and committed engineer, with a growth mindset and a get-it-done, on-time spirit

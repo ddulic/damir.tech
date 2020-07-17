@@ -38,7 +38,7 @@ jobs:
         <a class="animated-button sandy-one" href="/ddulic.pdf">Download Resume</a>' >> $DEST
 
         sed -i '/<div style="page-break-after: always;"><\/div>/d' $DEST
-        sed -i 's/ {#professional_summary}//g' $DEST
+        sed -i 's/ {#psummary}//g' $DEST
         sed -i 's/ {#experience}//g' $DEST
         sed -i 's/ {#projects}//g' $DEST
         sed -i 's/ {#certificates}//g' $DEST
