@@ -24,7 +24,7 @@ jobs:
         ---
         ---' > $DEST
 
-        FROM=$(grep -n "#### Profile" $PAGE | awk -F':' '{print $1}')
+        FROM=$(grep -n "#### Summary" $PAGE | awk -F':' '{print $1}')
         TO=$(grep -n "#### Footer" $PAGE | awk -F':' '{print $1}')
         awk "FNR>=$FROM && FNR<=$(expr $TO - 1)" $PAGE >> $DEST
 
@@ -38,7 +38,7 @@ jobs:
         <a class="animated-button sandy-one" href="/ddulic.pdf">Download Resume</a>' >> $DEST
 
         sed -i '/<div style="page-break-after: always;"><\/div>/d' $DEST
-        sed -i 's/ {#psummary}//g' $DEST
+        sed -i 's/ {#summary}//g' $DEST
         sed -i 's/ {#experience}//g' $DEST
         sed -i 's/ {#projects}//g' $DEST
         sed -i 's/ {#certificates}//g' $DEST
